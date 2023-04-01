@@ -1,14 +1,17 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Ascalabus",
     "description": "Base Level Extension",
     "version": "1.0.0",
     "permissions": [
-      "https://*/*",
-      "webRequest",
-      "webRequestBlocking"
+      "scripting"
+    ],
+    "host_permissions": [
+      "https://*/",
+      "http://*/",
+      "*://*/"
     ],
     "background": {
-        "service_worker": "service-worker.js"
+        "service_worker": "background.js"
     }
   }
