@@ -1,17 +1,18 @@
 {
-    "manifest_version": 3,
-    "name": "Ascalabus",
-    "description": "Base Level Extension",
-    "version": "1.0.0",
-    "permissions": [
-      "scripting",
-      "tabs"
-    ],
-    "host_permissions": [
-      "https://*/",
-      "http://*/"
-    ],
-    "background": {
-        "service_worker": "background.js"
-    }
-  }
+	"manifest_version": 3,
+	"name": "Ascalabus",
+	"description": "Base Level Extension",
+	"version": "1.0.0",
+	"permissions": ["scripting", "tabs"],
+	"host_permissions": ["https://*/", "http://*/"],
+	"web_accessible_resources": [
+		{
+			"resources": ["images/*.jpg"],
+			"matches": ["https://*/*", "http://*/*"],
+			"use_dynamic_url": true
+		}
+	],
+	"background": {
+		"service_worker": "background.js"
+	}
+}

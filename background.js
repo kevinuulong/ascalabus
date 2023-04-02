@@ -1,30 +1,32 @@
 function demeter() {
-
     const config = {
         chance: 0.50,
-        images: 20,
+        images: 33,
         random: () => { return Math.floor(Math.random() * config.images) + 1 }
     }
 
-    let images = document.querySelectorAll('image');
+    let images = document.querySelectorAll('img');
 
     for (const image of images) {
-        console.log(image);
         if (Math.random() < config.chance) {
-            image.src = `./images/lizard_${config.random()}`;
+            let src = chrome.runtime.getURL(`/images/lizard_${config.random()}.jpg`);
+            image.src = src;
             image.style.objectFit = 'cover';
-            console.log('Image replaced...');
+            if (image.srcset) {
+                image.setAttribute('srcset', src);
+            }
         }
     }
 }
 
-chrome.tabs.onActivated.addListener((activeInfo) => {
-    console.log('Switched tab');
-    if (chrome.tabs.get(activeInfo.tabId).url?.startsWith("chrome://")) return undefined;
-    console.log("Valid tab");
-    chrome.scripting.executeScript({
-        target: { tabId: activeInfo.tabId },
-        function: demeter
-    })
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+    if (!chrome.tabs.get(tabId).url?.startsWith("chrome://")) {
+        if (changeInfo.status == 'loading') {
+            chrome.scripting.executeScript({
+                target: { tabId: tabId },
+                function: demeter
+            })
+        }
+    }
 })
 
