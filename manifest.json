@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Ascalabus",
-	"description": "Base Level Extension",
+	"description": "Who's laughing now?",
 	"version": "1.0.0",
 	"permissions": ["scripting", "tabs"],
 	"host_permissions": ["https://*/", "http://*/"],
